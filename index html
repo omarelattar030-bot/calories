@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>متابعة السعرات - FIT EGPRO</title>
+<style>
+*{box-sizing:border-box;font-family:Tahoma,Arial,sans-serif}
+body{margin:0;background:linear-gradient(#dfe6fb,#f7f8fd 320px);color:#1b2347;padding:12px}
+.w{max-width:760px;margin:auto}
+.card{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 6px 20px #3f6fe018}
+h1{margin:0 0 4px;font-size:22px;color:#3f6fe0}h3{margin:0 0 10px}
+label{display:block;font-size:13px;margin:8px 0 3px;color:#5a6591}
+input,select{width:100%;padding:11px;border:1px solid #d3dcf3;border-radius:10px;font-size:15px;background:#fff}
+button{background:#3f6fe0;color:#fff;border:0;border-radius:10px;padding:11px 16px;font-size:15px;cursor:pointer}
+button.g{background:#e8eefc;color:#2b4bb0}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tabs button{flex:1;background:#e8eefc;color:#2b4bb0}.tabs button.on{background:#3f6fe0;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.st{background:#f2f5fd;border-radius:12px;padding:10px}.st b{display:block;font-size:18px}.st small{color:#667}
+.bar{height:9px;background:#e6ebfa;border-radius:9px;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#3f6fe0,#8b5cf6);border-radius:9px}.card h3{font-size:17px}.it{background:#f7f9fe;border-radius:12px;padding:10px;margin-bottom:6px;border:0}.tabs button.on{box-shadow:0 4px 12px #3f6fe040}
+.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px}.days button{min-width:42px;padding:8px 0;background:#e8eefc;color:#2b4bb0}
+.days button.on{background:#3f6fe0;color:#fff}.days button.t{outline:2px solid #f2a93b}
+.sug{border:1px solid #d3dcf3;border-radius:10px;max-height:190px;overflow:auto;margin-top:4px}
+.sug div{padding:9px;border-bottom:1px solid #eceffa;cursor:pointer;font-size:14px}.sug small{color:#778}
+.it{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eceffa;font-size:14px}
+.it span{color:#778;font-size:12px}.x{background:#fde8e8;color:#c33;padding:4px 10px}
+.note{font-size:12px;color:#778;text-align:center}.hide{display:none}
+.hero{background:linear-gradient(135deg,#0b1230,#2b1b6b 60%,#3f6fe0);color:#fff;border-radius:22px;padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;gap:14px}.hero img{width:96px;height:auto;flex:none;filter:drop-shadow(0 4px 10px #0009)}.hero h1{color:#fff;font-size:20px}.hero #sub{font-size:13px;color:#dfe6fb}
+.ringw{display:flex;align-items:center;gap:12px}
+button{transition:.15s}button:active{transform:scale(.96)}.sug div:hover{background:#eef2ff}
+input:focus,select:focus{outline:2px solid #8b5cf6;border-color:#8b5cf6}
+.big{font-size:34px;color:#3f6fe0;font-weight:bold}
+</style></head><body><div class="w">
+<div class="hero"><img src="Untitled-1.jpg" alt="FIT EGPRO" onerror="this.style.display='none'"><div><h1>متابعة السعرات الحرارية</h1><div id="sub">احسب احتياجك وسجّل أكلك يوميًا لمدة شهر</div></div></div>
+
+<div id="gl" class="card hide" style="text-align:center"><h3>🔐 ادخل بحساب جوجل</h3>
+<div class="note" style="margin-bottom:12px">ادخل بجيميلك من أي موبايل، وهتلاقي بياناتك وأكل كل يوم محفوظين على حسابك.</div>
+<div id="iab" class="hide" style="background:#fff4e5;color:#8a5200;font-size:13px;border-radius:12px;padding:10px;margin-bottom:12px;text-align:right">⚠️ إنت فاتح من جوه تطبيق (فيسبوك أو إنستجرام) وجوجل بتمنع الدخول من هنا. اضغط ⋯ واختار "فتح في المتصفح" (كروم أو سفاري) وادخل من هناك.</div>
+<div id="gbtn" style="display:flex;justify-content:center;min-height:44px"></div>
+<div id="glm" class="note" style="color:#c33;margin-top:10px"></div></div>
+
+<div id="reg" class="card hide"><h3 id="regT">سجّل بياناتك</h3>
+<label>الاسم</label><input id="n">
+<div class="row"><div><label>السن</label><input id="a" type="number"></div><div><label>النوع</label><select id="s"><option value="m">ذكر</option><option value="f">أنثى</option></select></div></div>
+<div class="row"><div><label>الوزن (كجم)</label><input id="w" type="number"></div><div><label>الطول (سم)</label><input id="h" type="number"></div></div>
+<label>مستوى النشاط</label><select id="act"><option value="0">خامل (قاعد طول اليوم)</option><option value="1">خفيف (تمرين 1-3 أيام)</option><option value="2" selected>متوسط (3-5 أيام)</option><option value="3">عالي (6-7 أيام)</option><option value="4">رياضي جدًا / شغل شاق</option></select>
+<label>هدفك</label><select id="g"><option value="-1">تنزيل وزن</option><option value="0" selected>تثبيت وزن</option><option value="1">زيادة وزن</option><option value="2">بناء عضلات 💪</option></select>
+<label>لينك حسابك على فيسبوك (مطلوب)</label><input id="fb" dir="ltr" inputmode="url" placeholder="https://www.facebook.com/...">
+<div class="note" style="text-align:right">من بروفايلك على فيسبوك اضغط ⋯ ثم "نسخ الرابط" والصقه هنا</div>
+<label>رقم واتساب (اختياري)</label><input id="wap" dir="ltr" inputmode="tel" placeholder="01xxxxxxxxx">
+<label style="display:flex;gap:8px;align-items:flex-start;margin-top:12px"><input id="cs" type="checkbox" style="width:auto;margin-top:3px"> أوافق إن بياناتي الأساسية (الاسم والعمر والقياسات والهدف) تتبعت للمدرب لمتابعتي، وإن أكلي اليومي يتحفظ على حسابي عشان أرجعله من أي جهاز.</label>
+<br><button id="rb" style="width:100%" onclick="reg()">احسب وابدأ</button>
+<button id="cx" class="g hide" style="width:100%;margin-top:8px" onclick="cancelEdit()">إلغاء ورجوع</button>
+<p class="note" style="text-align:right">📱 بياناتك وأكلك بيتحفظوا على حسابك (جوجل) وترجعلهم من أي موبايل بالدخول بنفس الجيميل.</p><p class="note">الأرقام إرشادية وليست بديلًا عن أخصائي تغذية.</p></div>
+
+<div id="app" class="hide">
+<div class="tabs"><button id="t0" onclick="tab(0)">🍽️ اليوم</button><button id="t1" onclick="tab(1)">📊 الشهر</button><button id="t2" onclick="tab(2)">المياه 💧</button></div>
+<div class="row" style="margin-bottom:6px"><button class="g" onclick="editProfile()">✏️ تعديل بياناتي</button><button class="g" onclick="logout()">🚪 خروج</button></div>
+<div id="sy" class="note" style="text-align:right;margin:0 0 10px"></div>
+
+<div id="p0"><div class="card"><div class="days" id="days"></div>
+<div class="grid" id="sum"></div><div id="bars" style="margin-top:12px"></div></div>
+<div class="card"><h3>أضف أكلة</h3>
+<select id="meal"><option>فطار</option><option>غدا</option><option>عشا</option><option>سناكس</option></select>
+<label>ابحث عن الأكلة (مثلًا: كشري، فراخ، موز)</label><input id="q" oninput="srch()" autocomplete="off" placeholder="اكتب بأي طريقة: قهوه، نسكافيه، فراخ، رز...">
+<div id="sug" class="sug hide"></div>
+<button class="g" style="width:100%;margin-top:8px" onclick="manual()">✍️ مش لاقي الأكلة؟ ضيفها بنفسك</button>
+<div id="mf" class="hide" style="background:#f2f5fd;border-radius:14px;padding:12px;margin-top:10px"><b>أكلة جديدة (من الملصق الغذائي)</b>
+<div class="row" style="margin-top:8px"><label style="display:block;text-align:center;background:#e8eefc;color:#2b4bb0;border-radius:10px;padding:12px;cursor:pointer;margin:0">📸 صوّر الملصق الغذائي<input type="file" accept="image/*" style="display:none" onchange="ocr(this.files[0]);this.value=''"></label>
+<label style="display:block;text-align:center;background:#e8eefc;color:#2b4bb0;border-radius:10px;padding:12px;cursor:pointer;margin:0">🔳 امسح الباركود<input type="file" accept="image/*" style="display:none" onchange="scanBar(this.files[0]);this.value=''"></label></div>
+<div id="ost" class="note" style="text-align:right"></div>
+<details id="raw" class="hide"><summary class="note" style="text-align:right">النص اللي اتقرأ من الصورة</summary><pre id="rt" style="white-space:pre-wrap;font-size:11px;direction:ltr;margin:4px 0"></pre></details>
+<div class="note" style="text-align:right">الصورة بتتقرأ على جهازك ومش بتتبعت لحد. الأصناف اللي بتضيفها بتتحفظ على حسابك.</div>
+<label>الاسم</label><input id="mn">
+<label>الحصة (مثلًا: كيس 30 جم / علبة 250 مل)</label><input id="ms" placeholder="لو كتبت الوزن بجم أو مل هتقدر تحسب بيه">
+<div class="row"><div><label>السعرات</label><input id="mk" type="number"></div><div><label>بروتين (جم)</label><input id="mp" type="number"></div></div>
+<div class="row"><div><label>كارب (جم)</label><input id="mc" type="number"></div><div><label>دهون (جم)</label><input id="mf2" type="number"></div></div>
+<div class="row" style="margin-top:10px"><button onclick="saveCustom()">حفظ وإضافة</button><button class="g" onclick="$('mf').classList.add('hide')">إلغاء</button></div></div>
+<div id="pick" class="hide"><p id="pk" style="font-weight:bold"></p><div class="row"><div><label>الكمية</label><input id="qty" type="number" value="1" step="any" min="0"></div><div><label>الوحدة</label><select id="unit" onchange="uch()"></select></div><div style="display:flex;align-items:flex-end"><button style="width:100%" onclick="add()">إضافة</button></div></div></div></div>
+<div class="card"><h3>أكل اليوم</h3><div id="list"></div></div></div>
+
+<div id="p1" class="hide"><div class="card"><h3>📈 رسم الشهر</h3><div id="mb" class="row" style="gap:6px;flex-wrap:wrap;margin-bottom:10px"></div><div id="chart" style="overflow-x:auto"></div><p class="note">الخط الأخضر = اللي أكلته كل يوم، والخط المنقط = هدفك</p></div>
+<div class="card"><h3>ملخص الشهر</h3><div class="grid" id="msum"></div></div></div>
+
+<div id="p2" class="hide"><div class="card"><h3>حاسبة المياه</h3>
+<div class="row"><div><label>الوزن (كجم)</label><input id="ww" type="number" oninput="wat()"></div><div><label>النشاط</label><select id="wa" onchange="wat()"><option value="0">خامل</option><option value="1">خفيف</option><option value="2">متوسط</option><option value="3">عالي</option><option value="4">رياضي جدًا</option></select></div></div>
+<div style="text-align:center;margin-top:14px"><div class="big" id="wl">—</div><div id="wc" class="note"></div></div></div></div>
+</div>
+<div class="card" style="text-align:center"><div style="font-size:14px;margin-bottom:10px">لو عندك أي استفسار تواصل معنا على صفحتنا على فيسبوك</div><a href="https://www.facebook.com/profile.php?id=61576464833845" target="_blank" rel="noopener" style="display:inline-block;background:#1877f2;color:#fff;border-radius:10px;padding:10px 18px;text-decoration:none;font-size:15px">💬 تواصل معنا على فيسبوك</a></div>
+<script>
+const DB=`بيتزا مارجريتا|شريحة|250|10|32|9
+بيتزا بيبروني|شريحة|300|12|31|14
+بيتزا خضار|شريحة|210|8|29|7
+برجر لحم عادي|ساندوتش|470|24|40|23
+برجر دبل جبنة|ساندوتش|820|46|43|48
+ساندوتش دجاج كرسبي|ساندوتش|620|27|52|32
+بطاطس محمرة وسط|حجم وسط|380|4|48|19
+بطاطس محمرة كبير|حجم كبير|510|6|66|24
+نوجتس دجاج|6 قطع|270|15|16|16
+بروستد صدر|قطعة|390|34|11|21
+بروستد فخذ|قطعة|280|18|8|19
+شيبس صغير|25 جم|135|1.5|14|8.5
+شيبس عائلي|85 جم|460|5|48|28
+دوريتوس|30 جم|150|2|18|8
+شاورما دجاج|ساندوتش كبير|550|32|46|23
+شاورما لحم|ساندوتش كبير|610|29|42|29
+بيبسي / كوكاكولا عادية|عبوة 330مل|140|0|36|0
+بيبسي دايت / زيرو|عبوة 330مل|0|0|0|0
+سفن أب / سبرايت|عبوة 330مل|148|0|37|0
+ميرندا / فانتا|عبوة 330مل|160|0|40|0
+مشروب طاقة ريد بول|عبوة 250مل|110|1|27|0
+جاتوريد|عبوة 500مل|130|0|34|0
+عصير برتقال فريش|كوب 240مل|112|1.7|26|0.5
+عصير مانجو معلب|كوب 240مل|145|0.5|36|0.2
+عصير قصب|كوب 300مل|220|1|54|0
+شاي بحليب (2 سكر)|كوب|110|3|16|3
+حواوشي بلدي|رغيف|500|22|36|28
+طعمية / فلافل|قطعة|70|2|6|4.5
+كشري مصري|طبق متوسط 350جم|650|16|105|16
+طاجن مكرونة باللحم|طاجن وسط|580|24|72|20
+مكرونة بشاميل|قطعة 200جم|450|18|44|22
+محشي كرنب|5 أصابع|210|3.5|27|9.5
+محشي ورق عنب|5 أصابع|230|3.5|30|10
+محشي كوسة|حبتين|220|4|26|11
+ملوخية مطبوخة|مغرفة كبيرة|65|2.5|6|3.5
+فتة مصرية باللحم|طبق متوسط|680|32|70|28
+مسقعة باذنجان ولحم|طبق متوسط|390|14|20|28
+كبدة إسكندراني|100 جم|210|23|5|11
+سجق شرقي|100 جم|340|15|4|29
+كفتة مشوية|100 جم|260|19|4|18
+طرب مشوي|100 جم|420|14|2|38
+فول مدمس بالزيت|طبق صغير 150جم|210|10|28|6
+صدور دجاج مشوية|100 جم|165|31|0|3.6
+أوراك دجاج بدون جلد|100 جم|209|26|0|10.9
+لحم بقر كاندوز|100 جم|215|27|0|11
+لحم ضاني|100 جم|280|25|0|19
+سمك بلطي مشوي|100 جم|128|26|0|2.6
+سمك بوري مشوي|100 جم|170|20|0|10
+سلمون مشوي|100 جم|206|22|0|12.3
+تونة بالماء|علبة 100جم|116|26|0|1
+تونة بالزيت|علبة 100جم|186|24|0|10
+جمبري|100 جم|99|24|0.2|0.3
+كاليماري مشوي|100 جم|92|16|3|1.4
+بيض مسلوق|بيضة|72|6.3|0.4|4.8
+بيض مقلي بالزبدة|بيضة|95|6.3|0.4|7.5
+جبنة قريش|100 جم|98|11.2|3.4|4.3
+زبادي يوناني|100 جم|59|10|3.6|0.4
+عدس مطبوخ|100 جم|116|9|20|0.4
+أرز أبيض مطبوخ|100 جم|130|2.7|28|0.3
+أرز بسمتي مطبوخ|100 جم|121|2.5|25.2|0.4
+أرز بني مطبوخ|100 جم|112|2.6|23.5|0.9
+مكرونة مسلوقة|100 جم|131|5|25|1.1
+بطاطس مسلوقة|100 جم|87|1.9|20.1|0.1
+بطاطا مشوية|100 جم|90|2|20.7|0.1
+شوفان جاف|100 جم|389|16.9|66.3|6.9
+عيش بلدي|رغيف 90جم|240|8|48|1.2
+عيش فينو|رغيف 50جم|140|4.2|27.5|1.5
+توست أبيض|شريحة|66|2|12.3|0.9
+توست أسمر|شريحة|65|2.7|11.8|0.8
+كرواسون بالزبدة|حبة|272|5.5|31|14
+باتيه بالجبنة|حبة|290|6.5|33|15
+كينوا مطبوخة|100 جم|120|4.4|21.3|1.9
+جبنة رومي|شريحة 30جم|115|7.2|0.6|9.3
+جبنة شيدر|شريحة 30جم|120|7|0.4|9.9
+جبنة موتزاريلا|30 جم|85|6.3|0.9|6.1
+زيت زيتون|ملعقة كبيرة|119|0|0|13.5
+سمن / زبدة|ملعقة كبيرة|102|0.1|0|11.5
+أفوكادو|100 جم|160|2|8.5|14.7
+لوز|30 جم|164|6|6|14
+عين جمل / جوز|30 جم|185|4.3|3.9|18.5
+سوداني محمص|30 جم|170|7.3|6|14
+زبدة فول سوداني|ملعقة كبيرة|94|4|3.2|8
+طحينة|ملعقة كبيرة|89|2.5|3.2|8
+بسبوسة بالمكسرات|قطعة 100جم|360|4.5|52|15
+كنافة بالقشطة|قطعة 100جم|390|5|48|20
+دوناتس شوكولاتة|حبة|270|3.5|31|15
+أم علي|طبق صغير|410|8.5|56|17
+أرز باللبن|طبق صغير|230|5.5|38|6
+شوكولاتة بالحليب|لوح 40جم|215|3|23|12.5
+شوكولاتة داكنة 70%|30 جم|170|2.2|13|12
+موز|حبة متوسطة|105|1.3|27|0.3
+تفاح|حبة متوسطة|95|0.5|25|0.3
+برتقال|حبة متوسطة|62|1.2|15|0.2
+تمر|3 حبات|200|1.7|54|0.2
+لبن كامل الدسم|كوب 240مل|150|8|12|8
+جبنة بيضاء|50 جم|130|7|1|11
+حمص مسلوق|100 جم|164|9|27|2.6
+عيش شامي|رغيف|165|5.5|33|0.7
+ملوخية بالفراخ|طبق|320|28|8|19
+بطاطس بالفرن|طبق صغير|220|4|38|6
+سلطة خضراء|طبق|40|1.5|7|0.5
+خيار / طماطم|حبة|20|1|4|0.2
+قهوة تركي سادة|فنجان|5|0.3|0.8|0|قهوه كوفي
+قهوة تركي بسكر|فنجان (ملعقة سكر)|25|0.3|6|0|قهوه كوفي
+قهوة فرنساوي بالحليب|كوب|110|5|10|5|قهوه كوفي
+نسكافيه سادة|كوب|5|0.3|0.8|0|قهوه كوفي نيسكافيه
+نسكافيه 3 في 1|كيس|90|1|16|2.5|قهوه كوفي نيسكافيه
+نسكافيه بالحليب والسكر|كوب|120|5|17|4|قهوه كوفي نيسكافيه
+كابتشينو|كوب وسط|120|6|10|6|قهوه كوفي
+لاتيه|كوب وسط|190|10|18|7|قهوه كوفي
+آيس كوفي|كوب 350مل|150|3|28|3|قهوه كوفي
+شاي سادة بدون سكر|كوب|2|0|0.5|0|
+شاي بسكر|كوب (2 سكر)|32|0|8|0|
+شاي أخضر|كوب|2|0|0.5|0|
+ينسون / نعناع / حلبة|كوب|2|0|0.5|0|
+كركديه بسكر|كوب|70|0|18|0|
+سحلب|كوب|220|6|34|7|
+عصير ليمون بسكر|كوب|100|0.3|26|0|
+مياه|كوب 250مل|0|0|0|0|ماء
+زبادي عادي|علبة 150جم|90|5|7|4|
+عسل نحل|ملعقة|64|0|17|0|
+مربى|ملعقة|50|0|13|0|
+بسكويت|3 قطع|120|2|18|4.5|
+أومليت بيض|بيضتين|190|13|1|15|
+جبنة فيتا|50 جم|130|7|2|10|
+مكرونة بالصلصة|طبق|420|13|75|8|
+ساندوتش فول|رغيف صغير|310|13|50|7|
+ساندوتش طعمية|رغيف صغير|380|12|50|15|
+آيس كريم|كرة|140|2|17|7|
+كيك|قطعة|330|5|44|15|
+توست بالجبنة|قطعة|240|9|24|12|`.split('\n').map(l=>{const a=l.split('|');return{n:a[0],s:a[1],k:+a[2],p:+a[3],c:+a[4],f:+a[5],a:a[6]||''}});
+
+/* ===== الإعدادات ===== */
+const HOOK='https://script.google.com/macros/s/AKfycbzhr0BlQC96_mk1cb26ta0ae1Ehp0wW7twqRh75wbG480ZsNmvXiJq8zAe0WRTl9gBG_g/exec';   /* لينك الـ Web app الجديد الخاص بك */
+const CID='789918779479-gfsu9vepj4287d4g12nm9h63mt98g03e.apps.googleusercontent.com';   /* OAuth Client ID */
+/* ================================ */
+
+const $=i=>document.getElementById(i),AF=[1.2,1.375,1.55,1.725,1.9],WA=[0,.3,.5,.8,1];
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const r=x=>Math.round(x);
+let cur=0,sel=0,curTab=0,EDIT=false,GN='',FL=false;
+
+/* ===== التخزين المحلي ===== */
+const LK='ctv2';
+let SESS='',EM='',S={};
+try{const L=JSON.parse(localStorage.getItem(LK)||'{}');SESS=L.sess||'';EM=L.em||'';S=L.S||{}}catch(e){}
+function save(){try{localStorage.setItem(LK,JSON.stringify({sess:SESS,em:EM,S}))}catch(e){}}
+
+/* ===== التواصل مع السيرفر ===== */
+async function api(b){
+ const x=await fetch(HOOK,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(b)});
+ return await x.json()}
+function setSy(t,c){const e=\$('sy');if(e){e.textContent=t;e.style.color=c||'#778'}}
+
+/* ===== البحث عن الأكل ===== */
+const AL={'فراخ':'دجاج','فرخه':'دجاج','رز':'ارز','عيش':'خبز','لحمه':'لحم','سمكه':'سمك','بطاطا':'بطاطس','كوفي':'قهوه','coffee':'قهوه','نيسكافيه':'نسكافيه','نسكافي':'نسكافيه','نسكفيه':'نسكافيه','tea':'شاي','شاى':'شاي','ماء':'مياه','مايه':'مياه'};
+const nz=t=>t.toLowerCase().replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/[^\u0621-\u064Aa-z0-9 ]/g,' ').trim();
+const wd=t=>nz(t).split(/\s+/).filter(Boolean).map(w=>w.length>3&&w.startsWith('ال')?w.slice(2):w).map(w=>AL[w]||w);
+function ed(a,b){let p=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let c=[i];for(let j=1;j<=b.length;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]==b[j-1]?0:1));p=c}return p[b.length]}
+DB.forEach(d=>d.w=wd(d.n+' '+d.a));
+const BASE=DB.length;
+function setCustom(l){DB.length=BASE;S.custom=Array.isArray(l)?l:[];S.custom.forEach(x=>DB.push({...x,w:wd(x.n)}))}
+setCustom(S.custom);
+
+/* ===== الحساب ===== */
+function calc(u){
+ const bmr=10*u.w+6.25*u.h-5*u.a+(u.s=='m'?5:-161);
+ let k=bmr*AF[u.act]+({'-1':-500,'0':0,'1':400,'2':300})[u.g];
+ k=Math.max(k,u.s=='m'?1500:1200);
+ const p=u.w*(u.g==2||u.g<0?2.1:1.8),f=k*.25/9,c=(k-p*4-f*9)/4;
+ u.bmr=r(bmr);u.k=r(k);u.p=r(p);u.f=r(f);u.c=r(c);return u}
+
+/* ===== الشاشات ===== */
+function show(id){['gl','reg','app'].forEach(x=>\$(x).classList.toggle('hide',x!==id))}
+function hdr(){\$('sub').textContent=S.u?'أهلًا '+S.u.n+' 👋 هدفك اليومي: '+S.u.k+' سعرة':'احسب احتياجك وسجّل أكلك يوميًا لمدة شهر'}
+
+function renderG(){
+ \$('iab').classList.toggle('hide',!/FBAN|FBAV|FB_IAB|Instagram|Line\//i.test(navigator.userAgent));
+ if(HOOK.indexOf('PUT_')==0||CID.indexOf('PUT_')==0){\$('glm').textContent='⚠️ لازم تحط لينك Apps Script وCLIENT_ID في أول السكريبت';return}
+ const go=()=>{google.accounts.id.initialize({client_id:CID,callback:onCred,auto_select:false});
+  google.accounts.id.renderButton(\$('gbtn'),{theme:'outline',size:'large',text:'continue_with',shape:'pill',width:280,locale:'ar'})};
+ if(window.google&&google.accounts&&google.accounts.id)return go();
+ const x=document.createElement('script');x.src='https://accounts.google.com/gsi/client';x.async=true;x.onload=go;
+ x.onerror=()=>{\$('glm').textContent='❌ مقدرتش أحمّل دخول جوجل، اتأكد من النت'};document.head.appendChild(x)}
+
+async function onCred(resp){
+ $('glm').style.color='#778';$('glm').textContent='⏳ جاري الدخول...';
+ try{const d=await api({a:'login',cred:resp.credential});if(!d.ok)throw new Error(d.err||'');
+  if(EM!==d.email)S={};EM=d.email;SESS=d.sess;GN=d.name||'';merge(d);save();\$('glm').textContent='';init();flush()}
+ catch(e){$('glm').style.color='#c33';$('glm').textContent='❌ مقدرتش أدخل: '+(e.message||'حاول تاني')}}
+
+function merge(d){
+ const lg=S.logs||{},pd=S.pend||{};
+ if(!S.pendP)S.u=d.profile||null;
+ S.start=d.start||S.start||null;
+ S.logs=d.days||{};
+ Object.keys(pd).forEach(k=>S.logs[k]=lg[k]||[]);
+ S.pend=pd;setCustom(d.foods||[])}
+
+async function pull(){
+ try{const d=await api({a:'load',s:SESS});if(d.err==='auth'){authLost();return false}if(!d.ok)return false;merge(d);save();return true}
+ catch(e){return false}}
+
+function authLost(){SESS='';save();init();$('glm').style.color='#c33';$('glm').textContent='انتهت الجلسة، ادخل تاني بجوجل'}
+
+function init(){
+ hdr();
+ if(!SESS){show('gl');renderG();return}
+ if(!S.u){show('reg');if(!$('n').value&&GN)$('n').value=GN;setRegMode(false);return}
+ if(!S.start){S.start=iso(new Date());save()}
+ show('app');$('ww').value=S.u.w;$('wa').value=S.u.act;
+ const t=Math.floor((new Date(iso(new Date()))-new Date(S.start))/864e5);sel=Math.min(Math.max(t,0),29);tab(0);wat()}
+
+async function boot(){
+ if(!SESS){init();return}
+ if(S.u){init();pull().then(ok=>{if(!SESS)return;if(ok){hdr();if(!S.u)init();else tab(curTab)}flush()});return}
+ \$('sub').textContent='⏳ جاري تحميل بياناتك...';
+ const ok=await pull();
+ if(!SESS)return;
+ if(!ok&&!S.u){show('gl');renderG();$('glm').style.color='#c33';$('glm').textContent='⚠️ مفيش اتصال بالسيرفر، جرّب تاني';return}
+ init();flush()}
+
+/* ===== الحفظ التلقائي ===== */
+function touch(d){S.pend=S.pend||{};S.pend[d]=(S.pend[d]||0)+1;save();setSy('⏳ بيتحفظ على حسابك...');flush()}
+async function flush(){
+ if(!SESS||FL)return;
+ if(!S.pendP&&!Object.keys(S.pend||{}).length)return;
+ FL=true;
+ try{
+  for(let g=0;g<5;g++){
+   if(S.pendP){const d=await api({a:'profile',s:SESS,u:S.u,start:S.start});if(d.err==='auth'){FL=false;authLost();return}if(!d.ok)throw 0;if(d.start)S.start=d.start;delete S.pendP;save()}
+   const ks=Object.keys(S.pend||{});if(!ks.length)break;
+   for(const k of ks){const v=S.pend[k];const d=await api({a:'day',s:SESS,date:k,entries:S.logs[k]||[]});
+    if(d.err==='auth'){FL=false;authLost();return}if(!d.ok)throw 0;if(S.pend[k]===v)delete S.pend[k];save()}
+   if(!Object.keys(S.pend||{}).length&&!S.pendP)break}
+  setSy('✅ محفوظ على حسابك','#2a8a4a')}
+ catch(e){setSy('⚠️ مفيش اتصال، هيتحفظ تلقائي أول ما النت يرجع','#c77a00')}
+ FL=false}
+window.addEventListener('online',flush);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)flush()});
+
+/* ===== تسجيل / تعديل البيانات ===== */
+function reg(){
+ if(!\$('cs').checked){alert('لازم توافق عشان تكمل');return}
+ const u={n:\$('n').value.trim(),a:+$('a').value,s:$('s').value,w:+$('w').value,h:+$('h').value,act:+$('act').value,g:+$('g').value};
+ if(!u.n||!u.a||!u.w||!u.h){alert('كمّل كل البيانات من فضلك');return}
+ u.fb=$('fb').value.trim();u.wa=$('wap').value.trim();
+ if(!/(facebook\.com|fb\.com|fb\.me)/i.test(u.fb)){alert('اكتب لينك حسابك على فيسبوك (لازم يكون فيه facebook.com)');return}
+ calc(u);EDIT=false;
+ S.u=u;if(!S.start)S.start=iso(new Date());S.logs=S.logs||{};S.pendP=1;save();
+ setRegMode(false);init();flush()}
+function setRegMode(edit){
+ \$('regT').textContent=edit?'تعديل بياناتك':'سجّل بياناتك';
+ \$('rb').textContent=edit?'حفظ التعديل وإعادة الحساب':'احسب وابدأ';
+ \$('cx').classList.toggle('hide',!edit)}
+function editProfile(){
+ const u=S.u;EDIT=true;
+ \$('n').value=u.n;$('a').value=u.a;$('s').value=u.s;$('w').value=u.w;$('h').value=u.h;
+ \$('act').value=u.act;$('g').value=u.g;$('fb').value=u.fb||'';$('wap').value=u.wa\vert{}\vert{}'';$('cs').checked=true;
+ setRegMode(true);show('reg');window.scrollTo(0,0)}
+function cancelEdit(){EDIT=false;setRegMode(false);show('app');window.scrollTo(0,0)}
+function logout(){
+ const p=Object.keys(S.pend||{}).length||S.pendP;
+ if(!confirm(p?'فيه بيانات لسه ماتحفظتش على حسابك (مفيش نت). لو خرجت دلوقتي ممكن تضيع. تخرج برضه؟':'تسجيل خروج؟ بياناتك محفوظة على حسابك وترجعلها بالدخول بجوجل.'))return;
+ try{google.accounts.id.disableAutoSelect()}catch(e){}
+ try{localStorage.removeItem(LK)}catch(e){}
+ SESS='';EM='';S={};location.reload()}
+
+/* ===== اليوم ===== */
+function dk(i){const d=new Date(S.start);d.setDate(d.getDate()+i);return iso(d)}
+function tab(i){curTab=i;[0,1,2].forEach(j=>{$('p'+j).classList.toggle('hide',j!=i);$('t'+j).classList.toggle('on',j==i)});if(i==0)day();if(i==1)month()}
+function tot(l){return(l||[]).reduce((a,e)=>({k:a.k+e.k,p:a.p+e.p,c:a.c+e.c,f:a.f+e.f}),{k:0,p:0,c:0,f:0})}
+function day(){const t=Math.floor((new Date(iso(new Date()))-new Date(S.start))/864e5);
+ \$('days').innerHTML=Array.from({length:30},(_,i)=>`<button class="${i==sel?'on':''} ${i==t?'t':''}" onclick="sel=${i};day()">${i+1}</button>`).join('');
+ const l=S.logs[dk(sel)]||[],T=tot(l),u=S.u;
+ const col=T.k>u.k?'#e8836b':'#3f6fe0',dd=Math.min(1,T.k/u.k)*327;$('sum').className='ringw';$('sum').innerHTML=`<svg width="130" height="130" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e6ebfa" stroke-width="12"/><circle cx="60" cy="60" r="52" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${dd} 327" transform="rotate(-90 60 60)"/><text x="60" y="58" text-anchor="middle" font-size="22" font-weight="bold" fill="${col}">${r(T.k)}</text><text x="60" y="76" text-anchor="middle" font-size="10" fill="#778">من ${u.k} سعرة</text></svg><div class="grid" style="flex:1;grid-template-columns:1fr 1fr"><div class="st"><b>${r(Math.abs(u.k-T.k))}</b><small>${T.k>u.k?'زيادة 🔴':'متبقي 🟢'}</small></div><div class="st"><b>${l.length}</b><small>أكلة مسجلة</small></div></div>`;
+ const B=(n,v,m)=>`<div style="font-size:13px">${n}: ${r(v)} / ${m} جم</div><div class="bar"><i style="width:${Math.min(100,v/m*100)}%"></i></div>`;
+ \$('bars').innerHTML=B('بروتين',T.p,u.p)+B('كارب',T.c,u.c)+B('دهون',T.f,u.f);
+ \$('list').innerHTML=l.length?l.map((e,i)=>`<div class="it"><div>${{'فطار':'🍳','غدا':'🍲','عشا':'🌙','سناكس':'🍎'}[e.m]} ${e.n} × ${e.q}<br><span>${e.m} • ${r(e.k)} سعرة • ب${r(e.p)} ك${r(e.c)} د${r(e.f)}</span></div><button class="x" onclick="del(${i})">حذف</button></div>`).join(''):'<p class="note">لسه مسجلتش حاجة في اليوم ده</p>'}
+function find(q){const t=wd(q);if(!t.length)return[];
+ return DB.map((d,i)=>{let s=0;for(const x of t){let b=0;for(const w of d.w){if(w==x)b=Math.max(b,3);else if(w.startsWith(x)||(x.length>3&&w.includes(x)))b=Math.max(b,2.5);else if(x.length>2&&ed(w,x)<=(x.length>5?2:1))b=Math.max(b,1)}if(!b){s=0;break}s+=b}return[d,i,s]}).filter(x=>x[2]>0).sort((a,b)=>b[2]-a[2]).slice(0,8)}
+function srch(){const q=$('q').value.trim(),b=$('sug');if(!q){b.classList.add('hide');return}
+ const m=find(q);
+ b.innerHTML=m.map(x=>`<div onclick="pick(${x[1]})">${x[0].n} <small>(${x[0].s} • ${x[0].k} سعرة)</small></div>`).join('')||'<div onclick="manual()">مش لاقي الأكلة؟ <b style="color:#3f6fe0">اضغط هنا وضيفها بنفسك ✍️</b></div>';b.classList.remove('hide')}
+function manual(){\$('sug').classList.add('hide');$('mf').classList.remove('hide');$('mn').value=$('q').value;$('mn').focus()}
+
+/* ===== قراءة الملصق الغذائي والباركود ===== */
+function loadT(){return new Promise((ok,no)=>{if(window.Tesseract)return ok();const x=document.createElement('script');x.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';x.onload=ok;x.onerror=no;document.head.appendChild(x)})}
+function prep(f){return new Promise(ok=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1800/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;const x=c.getContext('2d');try{x.filter='grayscale(1) contrast(1.4)'}catch(e){}x.drawImage(im,0,0,c.width,c.height);c.toBlob(ok,'image/png')};im.src=URL.createObjectURL(f)})}
+function parseNut(t){t=t.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٫,]/g,'.').replace(/\|/g,' ');const o={},L=t.toLowerCase().split('\n');
+ const a=t.match(/(\d{2,4}(?:\.\d+)?)\s*(?:kcal|كيلو\s*كالوري|سعر)/i)||t.match(/(?:calories?|سعرات|كالوري)\D{0,25}?(\d{2,4})/i),kj=t.match(/(\d{3,5})\s*(?:kj|كيلو\s*جول)/i);
+ if(a)o.k=Math.round(+a[1]);else if(kj)o.k=Math.round(kj[1]/4.184);
+ const N='(\\d+(?:\\.\\d+)?)',find=(kw,ex)=>{for(let i=0;i<L.length;i++){const l=L[i];if(!kw.test(l)||(ex&&ex.test(l)))continue;
+  let m=l.match(new RegExp('(?:'+kw.source+')\\D{0,30}?'+N))||l.match(new RegExp(N+'\\D{0,14}?(?:'+kw.source+')'));
+  if(!m){const nx=(L[i+1]||'').match(/(\d+(?:\.\d+)?)/);if(nx)m=nx}
+  if(m)return +m[1]}return null};
+ const p=find(/protein|بروتين|بروتن/),c=find(/carbo|carb|كربو|كاربو|كارب|نشويات/),f=find(/fat|دهون|دسم/,/sat|trans|مشبع|متحول/);
+ if(p!=null)o.p=p;if(c!=null)o.c=c;if(f!=null)o.f=f;
+ if(/100\s*(?:g|ml|غ|جم|جرام|مل)/i.test(t))o.s=/100\s*(?:ml|مل)/i.test(t)&&!/100\s*(?:g\b|غ|جم|جرام)/i.test(t)?'100 مل':'100 جم';
+ return o}
+function loadZ(){return new Promise((ok,no)=>{if(window.ZXing)return ok();const x=document.createElement('script');x.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';x.onload=ok;x.onerror=no;document.head.appendChild(x)})}
+async function scanBar(f){if(!f)return;const st=\$('ost');st.textContent='⏳ جاري قراءة الباركود...';let code=null;
+ try{if(window.BarcodeDetector){try{const r=await new BarcodeDetector().detect(await createImageBitmap(f));if(r.length)code=r[0].rawValue}catch(e){}}
+  if(!code){await loadZ();code=(await new ZXing.BrowserMultiFormatReader().decodeFromImageUrl(URL.createObjectURL(f))).getText()}}
+ catch(e){st.textContent='⚠️ مقدرتش أقرأ الباركود. صوّره أقرب وأوضح (أو صوّر الملصق الغذائي بدله).';return}
+ if(!/^\d{8,14}\$/.test(code)){st.textContent='⚠️ الكود ده QR بيفتح موقع مش باركود منتج. صوّر الباركود الخطي أو الملصق الغذائي.';return}
+ st.textContent='🔎 بدوّر على المنتج ('+code+')...';
+ try{const j=await(await fetch('https://world.openfoodfacts.org/api/v2/product/'+code+'.json?fields=product_name,product_name_ar,nutriments')).json();
+  if(j.status!=1){st.textContent='⚠️ المنتج ده مش موجود في القاعدة العالمية (المنتجات المصرية ناقصة). صوّر الملصق الغذائي أو اكتب الأرقام.';return}
+  const n=j.product.nutriments||{},r1=x=>x==null?'':Math.round(x*10)/10,k=n['energy-kcal_100g']!=null?n['energy-kcal_100g']:(n['energy_100g']?n['energy_100g']/4.184:null);
+  $('mn').value=j.product.product_name_ar\vert{}\vert{}j.product.product_name\vert{}\vert{}'';$('ms').value='100 جم';$('mk').value=k==null?'':Math.round(k);$('mp').value=r1(n.proteins_100g);$('mc').value=r1(n.carbohydrates_100g);$('mf2').value=r1(n.fat_100g);
+  st.textContent='✅ لقيت المنتج. الأرقام لكل 100 جم، راجعها واحفظ.'}
+ catch(e){st.textContent='❌ مقدرتش أوصل لقاعدة المنتجات. اكتب الأرقام بإيدك.'}}
+async function readLabel(b){const rd=l=>Tesseract.recognize(b,l,{},{blocks:true}).then(x=>x.data);
+ const A=await rd('ara+eng'),E=await rd('eng'),AR=/[\u0600-\u06FF]/,hint=((A.text+E.text).match(/100\s*(?:g|ml|غ|جم|جرام|مل)/i)||[''])[0];
+ if((A.text.match(/[\u0600-\u06FF]/g)||[]).length<8||!A.lines||!E.lines)return E.text+'\n'+hint;
+ const yc=l=>(l.bbox.y0+l.bbox.y1)/2;
+ return A.lines.map(l=>{const y=yc(l),h=Math.max(l.bbox.y1-l.bbox.y0,10);let e=null,d=1e9;E.lines.forEach(x=>{const t=Math.abs(yc(x)-y);if(t<d){d=t;e=x}});
+  if(!e||d>h*.8)return l.text.trim();if(!AR.test(l.text))return e.text.trim();
+  const ws=(e.words||[]).map(w=>({t:w.text.replace(/[^\d.]/g,''),c:w.confidence})).filter(w=>/^\d+(\.\d+)?\$/.test(w.t)&&!/^0\d/.test(w.t)).sort((p,q)=>q.c-p.c);
+  return l.text.replace(/[0-9٠-٩]+(?:[.,٫][0-9٠-٩]+)?/g,' ').trim()+'  '+(ws[0]?ws[0].t:'')}).join('\n')+'\n'+hint}
+async function ocr(f){if(!f)return;const st=\$('ost');st.textContent='⏳ جاري تحميل أداة القراءة عربي وإنجليزي (أول مرة بتاخد وقت)...';
+ try{await loadT();const b=await prep(f);st.textContent='🔍 جاري قراءة الصورة (على مرحلتين، استنى شوية)...';
+  const tx=await readLabel(b),o=parseNut(tx);$('rt').textContent=tx;$('raw').classList.remove('hide');const n=['k','p','c','f'].filter(x=>o[x]!=null).length;
+  if(!n){st.textContent='⚠️ مقدرتش ألاقي أرقام واضحة. جرّب صورة أقرب وأوضح، أو اكتب الأرقام بإيدك.';return}
+  if(o.k!=null)$('mk').value=o.k;if(o.p!=null)$('mp').value=o.p;if(o.c!=null)$('mc').value=o.c;if(o.f!=null)$('mf2').value=o.f;if(o.s&&!$('ms').value)$('ms').value=o.s;
+  st.textContent='✅ اتقرأ '+n+' من 4 قيم. راجعها كويس وصحّح أي رقم غلط، واكتب اسم الأكلة والحصة قبل الحفظ.'}
+ catch(e){st.textContent='❌ القراءة التلقائية مش شغالة دلوقتي (ممكن النت ضعيف). اكتب الأرقام بإيدك.'}}
+
+/* ===== إضافة وحذف الأكل ===== */
+function saveCustom(){const n=$('mn').value.trim(),k=+$('mk').value;if(!n||!k){alert('اكتب اسم الأكلة وعدد السعرات على الأقل');return}
+ const d={n,s:$('ms').value.trim()\vert{}\vert{}'حصة',k,p:+$('mp').value||0,c:+$('mc').value\vert{}\vert{}0,f:+$('mf2').value||0,a:''};
+ S.custom=S.custom||[];S.custom.push(d);save();
+ api({a:'food',s:SESS,d}).catch(()=>{});
+ const e={...d,w:wd(n)};DB.push(e);pk=e;['mn','ms','mk','mp','mc','mf2'].forEach(x=>$(x).value='');$('mf').classList.add('hide');showPick()}
+let pk=null;function pick(i){pk=DB[i];showPick()}
+function showPick(){const m=pk.s.match(/(\d+(?:\.\d+)?)\s*(جم|جرام|مل)/);pk.base=m?+m[1]:0;pk.u=m?(m[2]=='مل'?'مل':'جرام'):'';
+ \$('unit').innerHTML='<option value="s">حصة / عدد ('+pk.s+')</option>'+(pk.base?'<option value="b">'+pk.u+'</option>':'');\$('qty').value=1;
+ $('sug').classList.add('hide');$('q').value=pk.n;$('pick').classList.remove('hide');$('pk').textContent=pk.n+' — الحصة: '+pk.s+' ('+pk.k+' سعرة)'}
+function uch(){$('qty').value=$('unit').value=='b'?pk.base:1}
+function add(){const q0=+$('qty').value,b=$('unit').value=='b',q=b?q0/pk.base:q0;if(!pk||!q0)return;const d=dk(sel);(S.logs[d]=S.logs[d]||[]).push({n:pk.n,q:q0+' '+(b?pk.u:'حصة'),m:\$('meal').value,k:pk.k*q,p:pk.p*q,c:pk.c*q,f:pk.f*q});touch(d);
+ pk=null;\$('q').value='';$('qty').value=1;$('pick').classList.add('hide');day()}
+function del(i){const d=dk(sel);S.logs[d].splice(i,1);touch(d);day()}
+
+/* ===== الشهر والمياه ===== */
+let cm='k';
+function month(){const u=S.u,M={k:['السعرات',u.k,'#3f6fe0'],p:['البروتين',u.p,'#3b82c4'],c:['الكارب',u.c,'#f2a93b'],f:['الدهون',u.f,'#c76bb0']},m=M[cm];
+ \$('mb').innerHTML=Object.keys(M).map(x=>`<button class="${x==cm?'':'g'}" style="padding:7px 12px;font-size:13px;flex:none" onclick="cm='${x}';month()">${M[x][0]}</button>`).join('');
+ const v=Array.from({length:30},(_,i)=>{const l=S.logs[dk(i)];return l&&l.length?tot(l)[cm]:null});
+ const W=700,H=250,L=46,B=28,T0=14,mx=Math.max(m[1]*1.3,...v.map(x=>x||0)),X=i=>L+i*(W-L-12)/29,Y=x=>T0+(H-T0-B)*(1-x/mx);
+ let g=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;min-width:480px;direction:ltr">`;
+ for(let i=0;i<=4;i++){const y=T0+(H-T0-B)*i/4;g+=`<line x1="${L}" x2="${W-12}" y1="${y}" y2="${y}" stroke="#e8ecf8"/><text x="${L-6}" y="${y+4}" font-size="10" text-anchor="end" fill="#889">${r(mx*(1-i/4))}</text>`}
+ v.forEach((k,i)=>{if(i%2==0||i==29)g+=`<text x="${X(i)}" y="${H-10}" font-size="10" text-anchor="middle" fill="#889">${i+1}</text>`});
+ const pts=v.map((k,i)=>k===null?null:[X(i),Y(k),k,i]).filter(Boolean);
+ if(pts.length>1){const d=pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');g+=`<path d="${d} L${pts[pts.length-1][0]} ${Y(0)} L${pts[0][0]} ${Y(0)}Z" fill="${m[2]}" opacity=".12"/><path d="${d}" fill="none" stroke="${m[2]}" stroke-width="3" stroke-linejoin="round"/>`}
+ g+=`<line x1="${L}" x2="${W-12}" y1="${Y(m[1])}" y2="${Y(m[1])}" stroke="#f2a93b" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-14}" y="${Y(m[1])-5}" font-size="11" text-anchor="end" fill="#d58a14">الهدف ${m[1]}</text>`;
+ pts.forEach(p=>g+=`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="#fff" stroke="${m[2]}" stroke-width="3"><title>يوم ${p[3]+1}: ${r(p[2])}</title></circle>`);
+ \$('chart').innerHTML=g+'</svg>';
+ const ok=v.filter(x=>x!==null),a=ok.length?ok.reduce((x,y)=>x+y,0)/ok.length:0,near=ok.filter(x=>Math.abs(x-m[1])<=m[1]*.1).length;
+ \$('msum').innerHTML=`<div class="st"><b>${ok.length}</b><small>أيام مسجلة</small></div><div class="st"><b>${ok.length?r(a):'—'}</b><small>متوسط ${m[0]}</small></div><div class="st"><b>${near}</b><small>أيام قريبة من الهدف</small></div>`}
+function wat(){const w=+\$('ww').value;if(!w){$('wl').textContent='—';return}const l=w*.033+WA[+$('wa').value];
+ $('wl').textContent=l.toFixed(1)+' لتر';$('wc').textContent='حوالي '+Math.ceil(l*1000/250)+' كوب (الكوب 250 مل) موزعين على اليوم'}
+
+boot();
+</script></div></body></html>
